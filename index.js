@@ -34,15 +34,17 @@ function knn(features, labels, predictionPoint, k) {
   );
 }
 
-let predictionPoint = tf.tensor(testFeatures[0]);
-
 const featuresTensor = tf.tensor(features);
 const labelsTensor = tf.tensor(labels);
 const testFeaturesTensor = tf.tensor(testFeatures);
 const testLabelsTensor = tf.tensor(testLabels);
 
-const result = knn(featuresTensor, labelsTensor, predictionPoint, 10);
-const err = (testLabels[0][0] - result) / testLabels[0][0];
+testFeatures.forEach((testPoint, i) => {
+  let predictionPoint = tf.tensor(testPoint);
 
-console.log('guess', result, 'result', testLabels[0][0]);
-console.log('Error', err * 100);
+  const result = knn(featuresTensor, labelsTensor, predictionPoint, 10);
+  const err = (testLabels[i][0] - result) / testLabels[i][0];
+
+  console.log('guess', result, 'result', testLabels[i][0]);
+  console.log('Error', err * 100);
+});
