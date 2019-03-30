@@ -9,9 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tensorflow/tfjs": "^0.13.5",
-    "@tensorflow/tfjs-node": "^0.1.17",
-    "@tensorflow/tfjs-node-gpu": "^0.1.21",
+    "@tensorflow/tfjs": "^1.0.3",
+    "@tensorflow/tfjs-node": "^1.0.2",
     "lodash": "^4.17.11",
     "shuffle-seed": "^1.1.6"
   }
