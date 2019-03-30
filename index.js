@@ -28,9 +28,9 @@ function knn(features, labels, predictionPoint, k) {
       .expandDims(1)
       .concat(labels, 1)
       .unstack()
-      .sort((a, b) => (a.get(0) > b.get(0) ? 1 : -1))
+      .sort((a, b) => (a.arraySync()[0] > b.arraySync()[0] ? 1 : -1))
       .slice(0, k)
-      .reduce((acc, pair) => acc + pair.get(1), 0) / k
+      .reduce((acc, pair) => acc + pair.arraySync()[1], 0) / k
   );
 }
 
@@ -43,4 +43,4 @@ const testLabelsTensor = tf.tensor(testLabels);
 
 const result = knn(featuresTensor, labelsTensor, predictionPoint, 10);
 
-console.log('guess', result, testLabels[0][0]);
+console.log('guess', result, 'result', testLabels[0][0]);
