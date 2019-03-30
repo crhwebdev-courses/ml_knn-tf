@@ -17,5 +17,24 @@ let { features, labels, testFeatures, testLabels } = loadCSV(
   }
 );
 
-console.log(testFeatures);
-console.log(testLabels);
+function knn(features, labels, predictionPoint, k) {
+  return (
+    features
+      .sub(predictionPoint)
+      .pow(2)
+      .sum(1)
+      .pow(0.5)
+      .expandDims(1)
+      .concat(labels, 1)
+      .unstack()
+      .sort((a, b) => (a.get(0) > b.get(0) ? 1 : -1))
+      .slice(0, k)
+      .reduce((acc, pair) => acc + pair.get(1), 0) / k
+  );
+}
+
+features = tf.tensor(features);
+labels = tf.tensor(labels);
+
+const result = knn(features, labels, tf.tensor(testFeatures[0], 10));
+console.log('Guess', result, 'Result', testLabels[0][0]);
