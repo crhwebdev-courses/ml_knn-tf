@@ -2,13 +2,14 @@
 // - using cpu right now
 require('@tensorflow/tfjs-node');
 
-//require tensor flow file
+//require('@tensorflow/tfjs-node-gpu');
+
 const tf = require('@tensorflow/tfjs');
 
 const loadCSV = require('./load-csv');
 
 let { features, labels, testFeatures, testLabels } = loadCSV(
-  'kc_house_data.csv',
+  './kc_house_data.csv',
   {
     shuffle: true,
     splitTest: 10,
@@ -16,6 +17,8 @@ let { features, labels, testFeatures, testLabels } = loadCSV(
     labelColumns: ['price']
   }
 );
+
+console.log(testFeatures, testLabels);
 
 function knn(features, labels, predictionPoint, k) {
   return (
@@ -35,6 +38,9 @@ function knn(features, labels, predictionPoint, k) {
 
 features = tf.tensor(features);
 labels = tf.tensor(labels);
+// testFeatures = tf.tensor(testFeatures);
+// testLabels = tf.tensor(testLabels);
 
-const result = knn(features, labels, tf.tensor(testFeatures[0], 10));
-console.log('Guess', result, 'Result', testLabels[0][0]);
+const result = knn(features, labels, tf.tensor(testFeatures[0]), 10);
+
+console.log('guess', result, testLabels[0][0]);
