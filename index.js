@@ -34,11 +34,13 @@ function knn(features, labels, predictionPoint, k) {
   );
 }
 
-features = tf.tensor(features);
-labels = tf.tensor(labels);
-testFeatures = tf.tensor(testFeatures);
-testLabels = tf.tensor(testLabels);
+const predictionPoint = tf.tensor(testFeatures[0]);
 
-const result = knn(features, labels, tf.tensor(testFeatures[0]), 10);
+const featuresTensor = tf.tensor(features);
+const labelsTensor = tf.tensor(labels);
+const testFeaturesTensor = tf.tensor(testFeatures);
+const testLabelsTensor = tf.tensor(testLabels);
+
+const result = knn(featuresTensor, labelsTensor, predictionPoint, 10);
 
 console.log('guess', result, testLabels[0][0]);
