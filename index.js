@@ -55,6 +55,3 @@ testFeatures.forEach((testPoint, i) => {
   console.log('guess', result, 'result', testLabels[i][0]);
   console.log('Error', err * 100);
 });
-
-//const {mean, variance} = tf.moments(features, 0);
-//features.sub(mean).div(variance.pow(.5));
